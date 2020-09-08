@@ -28,7 +28,7 @@ const App: React.FC = () => {
     console.log(avatar);
   }
   function handleImagePickerGallery(){
-    const dataAvatar = avatar;
+    const imagens = avatar;
     
     ImagePicker.openPicker({
       width: 300,
@@ -41,7 +41,7 @@ const App: React.FC = () => {
        
         image.map( (img, index) => { 
           const id = index+1;
-          dataAvatar.push({
+          imagens.push({
                 id:id , 
                 path: img.path,
                 type: img.mime,
@@ -50,7 +50,7 @@ const App: React.FC = () => {
           setCount(id);
         })
 
-        setAvatar(dataAvatar);
+        setAvatar(imagens);
         handleControl()
 
     });  
