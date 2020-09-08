@@ -18,14 +18,9 @@ import {
 
 import ImagePicker from 'react-native-image-crop-picker';
 
-interface ImageProps{
-  id:number;
-  path:string;
-  type:string;
-}
 const App: React.FC = () => {
 
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState<object[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [count ,setCount] = useState(1);
 
@@ -33,11 +28,36 @@ const App: React.FC = () => {
     console.log(avatar);
   }
   function handleImagePickerGallery(){
-      console.log('oi')
+    const dataAvatar = avatar;
+    
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: false,
+      multiple: true,
+      mediaType: 'photo',
+    }).then((image) => {
+        setModalVisible(false);
+       
+        image.map( (img, index) => { 
+          const id = index+1;
+          dataAvatar.push({
+                id:id , 
+                path: img.path,
+                type: img.mime,
+          })        
+        
+          setCount(id);
+        })
+
+        setAvatar(dataAvatar);
+        handleControl()
+
+    });  
   }
 
   function handleImagePickerOpenCam(){
-    const dataAvatar = [...avatar];
+    const images = [...avatar];
     const id = count;
 
     ImagePicker.openCamera({
@@ -56,8 +76,8 @@ const App: React.FC = () => {
               type: image.mime,
             }
       
-      dataAvatar.push(img);
-      setAvatar(dataAvatar);
+      images.push(img);
+      setAvatar(images);
       handleControl()      
     }).catch(err => (
       console.log(` Error ${err}`)
