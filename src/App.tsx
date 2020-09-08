@@ -17,6 +17,7 @@ import {
 } from "./styles";
 
 import ImagePicker from 'react-native-image-crop-picker';
+import axios from 'axios';
 
 const App: React.FC = () => {
 
@@ -38,7 +39,7 @@ const App: React.FC = () => {
       mediaType: 'photo',
     }).then((image) => {
         setModalVisible(false);
-       
+
         image.map( (img, index) => { 
           const id = index+1;
           imagens.push({
@@ -86,10 +87,23 @@ const App: React.FC = () => {
 
   function handleImagePickerClean(id:number){
     const imgArray =  avatar;
-    const img = imgArray.filter( img => img.id !=  id);
+    const img = imgArray.filter( (img:any) => img.id !=  id);
     setAvatar(img);
   }
 
+  async function handleUploadImage() {
+    const data = new FormData();
+
+    avatar.map((image:any) =>{
+      data.append('image', {
+        path:image.path,
+        type: image.type
+      })
+    })
+
+    // await axios.post('http://localhost:3333/files', data);
+    console.log(data)
+  }
   return (
     <Container>
       <Modal
@@ -147,7 +161,7 @@ const App: React.FC = () => {
             }}
           />
         ): (
-          avatar.map( img => (
+          avatar.map( (img:any) => (
             <ContainerImageButtonClean key={img.id}>
               <Image
                 source={{ uri:img.path }}
@@ -171,7 +185,7 @@ const App: React.FC = () => {
 
       <Button>
         <Buttontext
-          onPress={()=>{}}                 
+          onPress={handleUploadImage}                 
         >Enviar
         </Buttontext>
       </Button>
