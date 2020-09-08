@@ -23,6 +23,9 @@ export const Buttontext = styled.Text`
 export const ButtonCancel = styled.TouchableOpacity`
     margin-top:30px;
 `;
+export const ButtonClean = styled.TouchableOpacity`
+   
+`;
 
 export const ButtonCancelText = styled.Text`
    font-size:18px;
@@ -34,26 +37,32 @@ export const Image = styled.Image`
     width: 100px;
     height: 100px;
     margin:10px;
+  
 `;
 
 export const CenteredView = styled.View`
     flex: 1;
     height: 100px;
     justify-content: center;
-    align-items: center;
-    margin-top: 22px;
+    background-color:rgba(59, 82, 80, 0.80);
     
 `;
 
 export const ModalView = styled.View`
-    margin: 20px;
-    background-color: white;
-    border-radius: 20px;
-    padding: 35px;
+    position: absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    justify-content:center;
     align-items: center;
+    padding: 35px; 
     border-color:#000;
-    border-width:1px;
-
+    border-width:0.5px;
+    border-top-left-radius:30px;
+    border-top-right-radius:30px;
+    background-color:#fff;
+    /* 222224 */
+    /* 30302e */
 `;
 
 export const ModalContainerText = styled.View`
@@ -72,5 +81,9 @@ export const ContainerImages = styled.View`
     flex-direction:row;
     flex-wrap:wrap;
     justify-content:center;
+    align-items:center;
+`;
+
+export const ContainerImageButtonClean = styled.View`
     align-items:center;
 `;
