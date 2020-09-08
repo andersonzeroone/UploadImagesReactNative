@@ -63,6 +63,13 @@ const App: React.FC = () => {
       console.log(` Error ${err}`)
     ))
   }
+
+  function handleImagePickerClean(id:number){
+    const imgArray =  avatar;
+    const img = imgArray.filter( img => img.id !=  id);
+    setAvatar(img);
+  }
+
   return (
     <Container>
       <Modal
@@ -125,7 +132,9 @@ const App: React.FC = () => {
               <Image
                 source={{ uri:img.path }}
               />
-              <ButtonClean>
+              <ButtonClean
+                onPress={() => handleImagePickerClean(img.id)}
+              >
                 <ButtonCancelText>Excluir</ButtonCancelText>
               </ButtonClean>
             </ContainerImageButtonClean>
